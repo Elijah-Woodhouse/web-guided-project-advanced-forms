@@ -15,9 +15,9 @@ export default function FriendForm(props) {
   }
 
   const onChange = evt => {
-    /* 🔥 FIX THIS SO IT ALSO WORKS WITH CHECKBOXES */
-    const { name, value } = evt.target
-    change(name, value)
+    const { name, value, checked, type } = evt.target
+    const valueToUse = type === "checkbox" ? checked : value
+    change(name, valueToUse);
   }
 
   return (
@@ -26,7 +26,7 @@ export default function FriendForm(props) {
         <h2>Add a Friend</h2>
 
         {/* 🔥 DISABLE THE BUTTON */}
-        <button>submit</button>
+        <button disabled={disabled}>submit</button>
 
         <div className='errors'>
           {/* 🔥 RENDER THE VALIDATION ERRORS HERE */}
@@ -77,34 +77,55 @@ export default function FriendForm(props) {
           </select>
         </label>
 
-        {/* ////////// RADIO BUTTONS ////////// */}
-        {/* ////////// RADIO BUTTONS ////////// */}
-        {/* ////////// RADIO BUTTONS ////////// */}
         <label>Single
-
+          <input
+          type="radio"
+          name="civil"
+          value="single"
+          onChange={onChange}
+          checked={values.civil === "single"}
+          />
         </label>
 
         <label>Married
-
+          <input
+          type="radio"
+          name="civil"
+          value="married"
+          onChange={onChange}
+          checked={values.civil === "married"}
+          />
         </label>
       </div>
 
       <div className='form-group checkboxes'>
         <h4>Hobbies</h4>
-
-        {/* ////////// CHECKBOXES ////////// */}
-        {/* ////////// CHECKBOXES ////////// */}
-        {/* ////////// CHECKBOXES ////////// */}
+    
         <label>Hiking
-
+          <input
+              type="checkbox"
+              name="hiking"
+              checked={values.hiking}
+              onChange={onChange}
+            />
         </label>
 
         <label>Reading
-
+          <input
+              type="checkbox"
+              name="reading"
+              checked={values.reading}
+              onChange={onChange}
+            />
         </label>
 
         <label>Coding
-
+          <input
+              type="checkbox"
+              name="coding"
+              checked={values.coding}
+              onChange={onChange}
+            />
         </label>
       </div>
     </form>
